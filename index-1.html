@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#08152f">
+<title>Awanishlearnings • SSC Calculation Quiz</title>
+<style>
+:root{--bg:#071329;--card:#0d1e3d;--card2:#10264d;--text:#f4f7ff;--muted:#aebbd4;--accent:#ffd400;--blue:#42a5ff;--green:#27d17f;--red:#ff5d6c}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(160deg,#061126,#0b1d3d 55%,#061126);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;min-height:100vh}
+.container{max-width:900px;margin:auto;padding:18px}.top{text-align:center;padding:10px 0 18px}.top h1{margin:0;font-size:clamp(27px,6vw,46px);letter-spacing:.5px}.top h1 span{color:var(--accent)}.top p{margin:7px 0;color:var(--muted)}
+.card{background:rgba(13,30,61,.96);border:1px solid #203d70;border-radius:20px;padding:20px;box-shadow:0 12px 40px #0005;margin-bottom:16px}
+.hidden{display:none!important}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.grid3{grid-template-columns:repeat(3,1fr)}
+button,select{font:inherit}button{border:0;border-radius:13px;padding:13px 16px;cursor:pointer;font-weight:800;color:#071329;background:var(--accent);transition:.15s}button:hover{transform:translateY(-1px);filter:brightness(1.04)}button.secondary{background:#18345f;color:#fff;border:1px solid #2d568e}button.green{background:var(--green)}button.red{background:var(--red);color:#fff}
+label{display:block;color:var(--muted);font-size:13px;margin-bottom:7px}select{width:100%;background:#091a35;color:#fff;border:1px solid #315486;border-radius:12px;padding:12px}
+.mode{padding:17px;border:1px solid #274a7c;border-radius:16px;background:#0a1a35}.mode strong{display:block;font-size:17px}.mode small{display:block;color:var(--muted);margin-top:4px;line-height:1.35}
+.stats{display:flex;gap:10px;flex-wrap:wrap}.stat{flex:1;min-width:110px;text-align:center;background:#091a35;border-radius:14px;padding:10px}.stat b{display:block;font-size:23px}.stat span{font-size:12px;color:var(--muted)}
+.progress{height:9px;background:#071126;border-radius:99px;overflow:hidden;margin:10px 0 18px}.bar{height:100%;background:linear-gradient(90deg,var(--blue),var(--accent));width:0}
+.qno{color:var(--accent);font-weight:800}.question{font-size:clamp(26px,7vw,48px);font-weight:900;text-align:center;margin:24px 0;min-height:65px;display:flex;align-items:center;justify-content:center}
+.answers{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.answer{background:#102b55;color:#fff;border:1px solid #315b93;font-size:20px;min-height:60px}.answer.selected{background:#244f8c;border-color:var(--accent);box-shadow:0 0 0 2px #ffd40055}.answer.correct{background:#116b47;border-color:#27d17f}.answer.wrong{background:#7a2431;border-color:#ff5d6c}.answer:disabled{cursor:default;transform:none}
+.feedback{text-align:center;min-height:28px;font-weight:800;margin:13px 0}.timer{font-size:20px;font-weight:900;color:var(--accent)}
+.result{text-align:center}.score{font-size:62px;font-weight:950;color:var(--accent)}.review{margin-top:15px;text-align:left}.review-row{padding:11px;border-bottom:1px solid #20385e}.ok{color:var(--green)}.bad{color:var(--red)}
+.footer{text-align:center;color:#7284a4;font-size:12px;padding:10px 0 30px}
+@media(max-width:600px){.container{padding:12px}.card{padding:15px}.grid,.answers{grid-template-columns:1fr}.grid3{grid-template-columns:1fr}.question{margin:18px 0}.answer{font-size:18px}}
+</style>
+<style>
+.nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px}
+.nav button{background:#102b55;color:#fff;border:1px solid #315b93;padding:10px 13px}
+.nav button.active{background:#ffd400;color:#071329}
+.badge{display:inline-block;padding:5px 9px;border-radius:999px;background:#ffd400;color:#071329;font-size:11px;font-weight:900}
+.premium-card{border:1px solid #765f08;background:linear-gradient(135deg,#172d50,#18213b)}
+.price{font-size:35px;font-weight:950;color:#ffd400}
+.feature{padding:9px 0;border-bottom:1px solid #263d62}
+.feature:last-child{border-bottom:0}
+input{width:100%;background:#091a35;color:#fff;border:1px solid #315486;border-radius:12px;padding:12px;outline:none}
+.dashgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:650px){.dashgrid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="container">
+<header class="top">
+<div style="font-size:14px;font-weight:900;letter-spacing:2px;color:#42a5ff;margin-bottom:5px">AWANISHLEARNINGS</div>
+<h1>SSC <span>CALCULATION QUIZ</span></h1>
+<p>Squares • Cubes • Fractions • Percentages • Fast Calculation</p>
+</header>
+
+
+<section id="dashboard" class="card">
+  <div class="nav">
+    <button id="navPractice" class="active" onclick="showPanel('setup')">Practice</button>
+    <button onclick="showPanel('premiumPanel')">Premium</button>
+    <button onclick="showPanel('historyPanel')">History</button>
+    <button onclick="showPanel('profilePanel')">Profile</button>
+  </div>
+  <div class="dashgrid">
+    <div class="stat"><b id="dashAttempts">0</b><span>Attempts</span></div>
+    <div class="stat"><b id="dashAvg">0%</b><span>Average</span></div>
+    <div class="stat"><b id="dashBest">0%</b><span>Best</span></div>
+    <div class="stat"><b id="dashPremium">FREE</b><span>Plan</span></div>
+  </div>
+</section>
+
+<section id="premiumPanel" class="card premium-card hidden">
+  <span class="badge">PREMIUM</span>
+  <h2>Awanishlearnings SSC Pro</h2>
+  <div class="price">₹99 <small style="font-size:14px;color:#aebbd4">Lifetime</small></div>
+  <p style="color:#aebbd4">Designed for serious SSC calculation practice.</p>
+  <div class="feature">✓ Unlimited mixed calculation practice</div>
+  <div class="feature">✓ Advanced difficulty sets</div>
+  <div class="feature">✓ Timed 50/100-question drills</div>
+  <div class="feature">✓ Detailed attempt history</div>
+  <div class="feature">✓ Weak-topic tracking</div>
+  <div class="feature">✓ Premium question-bank structure</div>
+  <a href="https://rzp.io/rzp/8A1N5zy" target="_blank" rel="noopener" style="display:block;text-decoration:none;margin-top:15px"><button style="width:100%">BUY LIFETIME ACCESS — ₹99</button></a>
+  <p style="font-size:12px;color:#8194b4;margin-bottom:0">Secure payment is processed by Razorpay. Premium access will be activated after payment verification.</p>
+  <div style="margin-top:15px;padding:12px;border:1px solid #315486;border-radius:12px;background:#091a35">
+    <b>After payment</b><br><span style="color:#aebbd4;font-size:13px">Keep your Razorpay payment receipt/order reference. We will connect verified payment with your Premium account in the next backend step.</span>
+  </div>
+</section>
+
+<section id="historyPanel" class="card hidden">
+  <h2>Practice History</h2>
+  <div id="historyList"></div>
+</section>
+
+<section id="profilePanel" class="card hidden">
+  <h2>Student Profile</h2>
+  <div class="grid">
+    <div><label>Name</label><input id="studentName" placeholder="Enter your name"></div>
+    <div><label>Target Exam</label><select id="targetExam"><option>SSC CGL</option><option>SSC CHSL</option><option>SSC GD</option><option>RRB NTPC</option><option>Other</option></select></div>
+  </div>
+  <button onclick="saveProfile()" style="margin-top:14px">SAVE PROFILE</button>
+</section>
+
+<section id="setup" class="card">
+<h2>Start Practice</h2>
+<div class="grid">
+<div><label>Topic</label><select id="topic">
+<option value="mixed">Mixed Calculation</option>
+<option value="square">Squares (1–30)</option>
+<option value="cube">Cubes (1–30)</option>
+<option value="fraction">Fraction → Percentage</option>
+<option value="percent">Percentage → Fraction</option>
+<option value="fraction_decimal">Fraction → Decimal</option>
+<option value="decimal_fraction">Decimal → Fraction</option>
+</select></div>
+<div><label>Questions</label><select id="count"><option>10</option><option>20</option><option>30</option><option>50</option></select></div>
+</div>
+<div class="grid" style="margin-top:12px">
+<div><label>Difficulty</label><select id="difficulty"><option value="easy">Easy</option><option value="medium">Medium</option><option value="hard">Hard</option></select></div>
+<div><label>Time</label><select id="time"><option value="0">No limit</option><option value="300">5 minutes</option><option value="600">10 minutes</option><option value="900">15 minutes</option></select></div>
+</div>
+<div class="grid" style="margin-top:14px">
+<button onclick="startQuiz()">START QUIZ</button>
+<button class="secondary" onclick="showBest()">BEST SCORE</button>
+</div>
+</section>
+
+<section id="quiz" class="card hidden">
+<div class="stats">
+<div class="stat"><b id="qCounter">1/10</b><span>Question</span></div>
+<div class="stat"><b id="scoreLive">0</b><span>Score</span></div>
+<div class="stat"><b id="accuracyLive">0%</b><span>Accuracy</span></div>
+<div class="stat"><b class="timer" id="timer">∞</b><span>Time</span></div>
+</div>
+<div class="progress"><div class="bar" id="bar"></div></div>
+<div class="qno" id="qType">QUESTION</div>
+<div class="question" id="question">—</div>
+<div class="answers" id="answers"></div>
+<div class="feedback" id="feedback"></div>
+<button class="hidden" id="submitBtn" onclick="submitAnswer()" style="width:100%;margin-top:4px">SUBMIT ANSWER ✓</button>
+<button class="secondary hidden" id="nextBtn" onclick="nextQuestion()" style="width:100%;margin-top:10px">NEXT QUESTION →</button>
+</section>
+
+<section id="result" class="card hidden result">
+<h2>Quiz Complete 🎯</h2>
+<div class="score" id="finalScore">0%</div>
+<p id="resultText"></p>
+<div class="stats">
+<div class="stat"><b id="rCorrect">0</b><span>Correct</span></div>
+<div class="stat"><b id="rWrong">0</b><span>Wrong</span></div>
+<div class="stat"><b id="rTime">0s</b><span>Time</span></div>
+</div>
+<div class="grid" style="margin-top:15px">
+<button onclick="restart()">TRY AGAIN</button>
+<button class="secondary" onclick="home()">HOME</button>
+</div>
+<div class="review" id="review"></div>
+</section>
+
+<section id="best" class="card hidden">
+<h2>Best Scores</h2><div id="bestList"></div>
+<button class="secondary" onclick="home()" style="margin-top:12px">BACK</button>
+</section>
+
+<div class="footer"><b style="color:#42a5ff">Awanishlearnings</b> • SSC Calculation Practice • No Ads • Your progress stays on this device</div>
+</div>
+
+<script>
+const fractions=[
+["1/2","50%","0.5"],["1/3","33.33%","0.3333"],["2/3","66.67%","0.6667"],
+["1/4","25%","0.25"],["3/4","75%","0.75"],["1/5","20%","0.2"],
+["2/5","40%","0.4"],["3/5","60%","0.6"],["4/5","80%","0.8"],
+["1/6","16.67%","0.1667"],["5/6","83.33%","0.8333"],["1/8","12.5%","0.125"],
+["3/8","37.5%","0.375"],["5/8","62.5%","0.625"],["7/8","87.5%","0.875"],
+["1/10","10%","0.1"],["3/10","30%","0.3"],["7/10","70%","0.7"],["9/10","90%","0.9"],
+["1/20","5%","0.05"],["1/25","4%","0.04"],["1/40","2.5%","0.025"],
+["1/50","2%","0.02"],["1/100","1%","0.01"]
+];
+let questions=[],idx=0,correct=0,wrong=0,answered=false,startTime=0,timerId=null,timeLimit=0;
+const $=id=>document.getElementById(id);
+function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
+function rand(min,max){return Math.floor(Math.random()*(max-min+1))+min}
+function fracValue(s){let [a,b]=s.split("/").map(Number);return a/b}
+function makeQuestion(topic,diff){
+let type=topic;
+if(topic==="mixed"){let types=["square","cube","fraction","percent","fraction_decimal"];type=types[rand(0,types.length-1)]}
+if(type==="square"){let n=rand(1,30);let ans=n*n;return build(`What is ${n}²?`,ans,"Square",diff)}
+if(type==="cube"){let n=rand(1,30);let ans=n*n*n;return build(`What is ${n}³?`,ans,"Cube",diff)}
+if(type==="fraction"){let f=fractions[rand(0,fractions.length-1)];return build(`Convert ${f[0]} into percentage.`,f[1],"Fraction → %",diff)}
+if(type==="percent"){let f=fractions[rand(0,fractions.length-1)];return build(`Convert ${f[1]} into fraction.`,f[0],"% → Fraction",diff)}
+if(type==="fraction_decimal"){let f=fractions[rand(0,fractions.length-1)];return build(`Convert ${f[0]} into decimal.`,f[2],"Fraction → Decimal",diff)}
+if(type==="decimal_fraction"){let f=fractions[rand(0,fractions.length-1)];return build(`Convert ${f[2]} into fraction.`,f[0],"Decimal → Fraction",diff)}
+}
+function build(q,ans,type,diff){
+let options=new Set([String(ans)]);
+let numeric=!isNaN(Number(ans));
+let tries=0;
+while(options.size<4 && tries++<100){
+if(numeric){let n=Number(ans);let d=diff==="easy"?rand(1,3):diff==="medium"?rand(1,Math.max(3,Math.round(Math.abs(n)*.08))):rand(1,Math.max(5,Math.round(Math.abs(n)*.18)));let v=n+(Math.random()<.5?-d:d);options.add(String(Number.isInteger(v)?v:v.toFixed(2)))}
+else{
+let pool=fractions.map(x=>x[type==="Fraction → %" ? 1 : 0]).filter(Boolean);options.add(pool[rand(0,pool.length-1)])
+}}
+return {q,ans:String(ans),type,options:shuffle([...options])};
+}
+function startQuiz(){
+let count=+$("count").value;let topic=$("topic").value,diff=$("difficulty").value;
+if((diff==="hard" || count>=50) && localStorage.getItem("awPremium")!=="1"){
+  showPanel("premiumPanel");
+  alert("This is an Awanishlearnings Premium feature. Activate Premium to unlock it.");
+  return;
+}
+questions=Array.from({length:count},()=>makeQuestion(topic,diff));idx=0;correct=0;wrong=0;answered=false;
+timeLimit=+$("time").value;startTime=Date.now();$("setup").classList.add("hidden");$("result").classList.add("hidden");$("best").classList.add("hidden");$("quiz").classList.remove("hidden");
+if(timerId)clearInterval(timerId); if(timeLimit)timerId=setInterval(updateTimer,250); render();
+}
+function updateTimer(){
+let elapsed=Math.floor((Date.now()-startTime)/1000),left=Math.max(0,timeLimit-elapsed);$("timer").textContent=left+"s";
+if(left<=0) finish();
+}
+let selectedAnswer=null, selectedButton=null;
+
+function render(){
+let q=questions[idx];$("qCounter").textContent=`${idx+1}/${questions.length}`;$("scoreLive").textContent=correct;
+$("accuracyLive").textContent=(idx?Math.round(correct/idx*100):0)+"%";$("bar").style.width=(idx/questions.length*100)+"%";
+$("qType").textContent=q.type.toUpperCase();$("question").textContent=q.q;$("feedback").textContent="";
+$("nextBtn").classList.add("hidden");$("submitBtn").classList.add("hidden");
+answered=false;selectedAnswer=null;selectedButton=null;
+$("answers").innerHTML=q.options.map((o,i)=>`<button class="answer" data-index="${i}" onclick="selectAnswer(this)">${o}</button>`).join("");
+}
+
+function selectAnswer(btn){
+if(answered)return;
+document.querySelectorAll(".answer").forEach(b=>b.classList.remove("selected"));
+btn.classList.add("selected");
+selectedButton=btn;selectedAnswer=btn.textContent;
+$("submitBtn").classList.remove("hidden");
+}
+
+function submitAnswer(){
+if(answered || selectedAnswer===null)return;
+answered=true;let q=questions[idx];
+document.querySelectorAll(".answer").forEach(b=>b.disabled=true);
+$("submitBtn").classList.add("hidden");
+
+if(selectedAnswer===q.ans){
+correct++;selectedButton.classList.add("correct");
+$("feedback").innerHTML='<span class="ok">✓ Correct!</span>';
+}else{
+wrong++;selectedButton.classList.add("wrong");
+document.querySelectorAll(".answer").forEach(b=>{if(b.textContent===q.ans)b.classList.add("correct")});
+$("feedback").innerHTML=`<span class="bad">✗ Correct answer: ${q.ans}</span>`;
+}
+$("scoreLive").textContent=correct;
+$("accuracyLive").textContent=Math.round(correct/(idx+1)*100)+"%";
+$("nextBtn").classList.remove("hidden");
+}
+function nextQuestion(){idx++;if(idx>=questions.length)finish();else render()}
+function finish(){
+if(timerId)clearInterval(timerId);let elapsed=Math.round((Date.now()-startTime)/1000),pct=Math.round(correct/questions.length*100);
+$("quiz").classList.add("hidden");$("result").classList.remove("hidden");$("finalScore").textContent=pct+"%";
+$("rCorrect").textContent=correct;$("rWrong").textContent=wrong;$("rTime").textContent=elapsed+"s";
+$("resultText").textContent=pct>=90?"Excellent SSC calculation speed!":pct>=70?"Good. Now push your calculation speed further.":"Practice the weak areas and repeat the quiz.";
+saveBest(pct,correct,questions.length,elapsed);
+let hist=JSON.parse(localStorage.getItem("awHistory")||"[]");
+hist.unshift({pct,correct,total:questions.length,time:elapsed,date:new Date().toLocaleString(),topic:$("topic").value});
+localStorage.setItem("awHistory",JSON.stringify(hist.slice(0,30)));
+updateDashboard();
+$("review").innerHTML="<h3>Quick Review</h3>"+questions.map((q,i)=>`<div class="review-row"><b>${i+1}. ${q.q}</b><br>Answer: <span class="ok">${q.ans}</span></div>`).join("");
+}
+function saveBest(p,c,t,time){
+let a=JSON.parse(localStorage.getItem("sscBest")||"[]");a.push({p,c,t,time,date:new Date().toLocaleDateString()});a.sort((x,y)=>y.p-x.p||x.time-y.time);localStorage.setItem("sscBest",JSON.stringify(a.slice(0,10)));
+}
+function showBest(){
+$("setup").classList.add("hidden");$("best").classList.remove("hidden");let a=JSON.parse(localStorage.getItem("sscBest")||"[]");
+$("bestList").innerHTML=a.length?a.map((x,i)=>`<div class="review-row"><b>#${i+1} — ${x.p}%</b> • ${x.c}/${x.t} correct • ${x.time}s • ${x.date}</div>`).join(""):"No scores yet. Complete your first quiz!";
+}
+function restart(){startQuiz()}
+function home(){if(timerId)clearInterval(timerId);$("quiz").classList.add("hidden");$("result").classList.add("hidden");$("best").classList.add("hidden");$("setup").classList.remove("hidden")}
+
+function showPanel(id){
+  ["setup","premiumPanel","historyPanel","profilePanel"].forEach(x=>$(x).classList.add("hidden"));
+  $(id).classList.remove("hidden");
+  if(id==="historyPanel")renderHistory();
+  if(id==="profilePanel")loadProfile();
+  updateDashboard();
+}
+function updateDashboard(){
+  let h=JSON.parse(localStorage.getItem("awHistory")||"[]");
+  let avg=h.length?Math.round(h.reduce((a,x)=>a+x.pct,0)/h.length):0;
+  let best=h.length?Math.max(...h.map(x=>x.pct)):0;
+  $("dashAttempts").textContent=h.length;$("dashAvg").textContent=avg+"%";$("dashBest").textContent=best+"%";
+  $("dashPremium").textContent=localStorage.getItem("awPremium")==="1"?"PRO":"FREE";
+}
+function renderHistory(){
+ let h=JSON.parse(localStorage.getItem("awHistory")||"[]");
+ $("historyList").innerHTML=h.length?h.map((x,i)=>`<div class="review-row"><b>${i+1}. ${x.pct}%</b> • ${x.correct}/${x.total} correct • ${x.time}s • ${x.topic} • ${x.date}</div>`).join(""):"No attempts yet.";
+}
+function saveProfile(){
+ localStorage.setItem("awProfile",JSON.stringify({name:$("studentName").value,target:$("targetExam").value}));
+ alert("Profile saved on this device.");
+}
+function loadProfile(){
+ let p=JSON.parse(localStorage.getItem("awProfile")||"{}");
+ $("studentName").value=p.name||"";$("targetExam").value=p.target||"SSC CGL";
+}
+updateDashboard();
+</script>
+</body>
+</html>
